@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KOKORO — あなたの AI を、あなたに合わせる</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a2e;
+      --muted: #5a6376;
+      --accent: #4361ee;
+      --accent-soft: #e8ecff;
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --border: #e5e7eb;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ---- layout ---- */
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---- header ---- */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; color: var(--ink); }
+    .logo span { color: var(--accent); }
+    nav a { color: var(--muted); font-size: .9rem; margin-left: 24px; }
+
+    /* ---- hero ---- */
+    .hero {
+      text-align: center;
+      padding: 80px 0 64px;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.35;
+      margin-bottom: 20px;
+    }
+    .hero h1 .highlight {
+      color: var(--accent);
+      border-bottom: 3px solid var(--accent-soft);
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 36px;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: opacity .2s;
+    }
+    .cta-btn:hover { opacity: .85; text-decoration: none; }
+
+    /* ---- sections ---- */
+    section { padding: 64px 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .label {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    /* ---- problem ---- */
+    .problem-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 28px;
+    }
+    @media (min-width: 520px) { .problem-grid { grid-template-columns: 1fr 1fr; } }
+    .problem-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .problem-card .icon { font-size: 1.4rem; margin-bottom: 8px; }
+    .problem-card p { font-size: .95rem; color: var(--muted); }
+
+    /* ---- how it works ---- */
+    .steps { margin-top: 28px; display: flex; flex-direction: column; gap: 24px; }
+    .step { display: flex; gap: 16px; align-items: flex-start; }
+    .step-num {
+      min-width: 36px; height: 36px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .9rem;
+    }
+    .step-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .step-body p { font-size: .9rem; color: var(--muted); }
+
+    /* ---- principles ---- */
+    .principles { margin-top: 28px; display: grid; gap: 16px; }
+    @media (min-width: 600px) { .principles { grid-template-columns: 1fr 1fr; } }
+    .principle {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .principle h3 { font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
+    .principle p { font-size: .88rem; color: var(--muted); }
+
+    /* ---- contact ---- */
+    .contact-box {
+      background: var(--accent-soft);
+      border-radius: var(--radius);
+      padding: 36px;
+      text-align: center;
+      margin-top: 28px;
+    }
+    .contact-box p { color: var(--muted); margin-bottom: 20px; }
+
+    /* ---- footer ---- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo"><span>KOKORO</span>.md</div>
+    <nav>
+      <a href="#how">仕組み</a>
+      <a href="#principles">設計原則</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>あなたの AI を、<br><span class="highlight">あなたに合わせる</span></h1>
+      <p>公認心理師が作る一枚のファイル <code>kokoro.md</code> が、ChatGPT・Claude・Gemini の応答を変える。</p>
+      <a class="cta-btn" href="#contact">詳しく聞く</a>
+    </div>
+  </section>
+
+  <!-- problem -->
+  <section id="problem">
+    <div class="container">
+      <div class="label">課題</div>
+      <h2>AI は「あなた」を知らない</h2>
+      <p>汎用 AI は誰に対しても同じように答えます。あなたの認知特性・コミュニケーション傾向・大切にしていることを知りません。</p>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="icon">&#x26A0;&#xFE0F;</div>
+          <p>過剰な「専門家に相談してください」が繰り返され、肝心のアドバイスが薄い</p>
+        </div>
+        <div class="problem-card">
+          <div class="icon">&#x1F4AC;</div>
+          <p>指示したはずのトーンや形式が、会話が進むと守られなくなる</p>
+        </div>
+        <div class="problem-card">
+          <div class="icon">&#x1F9E0;</div>
+          <p>認知的な苦手さを開示するたびに、AI の対応が変わって安定しない</p>
+        </div>
+        <div class="problem-card">
+          <div class="icon">&#x1F512;</div>
+          <p>カスタム設定を書いてみたが、臨床的に適切かどうか分からない</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- how it works -->
+  <section id="how">
+    <div class="container">
+      <div class="label">仕組み</div>
+      <h2>心理師が「翻訳」する、一枚のファイル</h2>
+      <p>検査結果や面接から得られた情報を、心理師が <strong>行動指示</strong> に変換します。所見の生データは一切 AI に渡しません。</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>アセスメント</h3>
+            <p>公認心理師が面接・心理検査を通じて認知特性やコミュニケーションの傾向を把握します。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>kokoro.md の作成</h3>
+            <p>所見を「AI への配慮指示」に翻訳。<em>「複数タスクを同時に指示しないで」「具体的なステップで」</em>のように書きます。あなたが内容を確認して同意します。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h3>各 AI に設定</h3>
+            <p>Claude Projects・ChatGPT Custom Instructions・Gemini Gems に貼り付けるだけ。専用アプリは不要です。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h3>定期的な更新</h3>
+            <p>心理師と定期的に振り返り、変化に合わせて <code>kokoro.md</code> を更新します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- principles -->
+  <section id="principles">
+    <div class="container">
+      <div class="label">設計原則</div>
+      <h2>守り続ける 4 つの約束</h2>
+      <div class="principles">
+        <div class="principle">
+          <h3>所見の生データは渡さない</h3>
+          <p>検査の素点・診断名・所見原文は AI に送りません。心理師の管理下に留まります。</p>
+        </div>
+        <div class="principle">
+          <h3>透明性</h3>
+          <p><code>kokoro.md</code> はあなたが読んで理解できる言葉で書かれます。同意できない記述は修正・削除できます。</p>
+        </div>
+        <div class="principle">
+          <h3>既存の AI をそのまま使う</h3>
+          <p>新しいアプリは不要。あなたがすでに使っている AI に設定するだけです。</p>
+        </div>
+        <div class="principle">
+          <h3>心理師による継続支援</h3>
+          <p>一度作って終わりではなく、心理師があなたの体験変化を聞き取りながら更新します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section id="contact">
+    <div class="container">
+      <div class="label">お問い合わせ</div>
+      <h2>まず話を聞いてみる</h2>
+      <div class="contact-box">
+        <p>KOKORO は現在パイロット導入に向けて準備中です。<br>心理師による初回相談（無料・オンライン）をご希望の方はメールでご連絡ください。</p>
+        <a class="cta-btn" href="mailto:obatomo1366@outlook.jp?subject=KOKORO%20%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">
+          メールで問い合わせる
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>KOKORO &mdash; <a href="https://github.com/akihidem/KOKORO">SPEC.md</a> は CC BY-SA 4.0 で公開中</p>
+    <p style="margin-top:6px;">公認心理師によるサービスです</p>
+  </div>
+</footer>
+
+</body>
+</html>
