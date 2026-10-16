@@ -162,13 +162,14 @@ footer {
 html:lang(en) body { font-family: -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; }
 html:lang(zh-Hans) body { font-family: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif; }
 html:lang(ko) body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+html:lang(es) body { font-family: -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; }
+html:lang(hi) body { font-family: 'Kohinoor Devanagari', 'Noto Sans Devanagari', 'Nirmala UI', sans-serif; }
+html:lang(ar) body { font-family: 'Geeza Pro', 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif; }
 
-/* なぜ: 言語の切り替えを足すと、狭い画面でヘッダが 1 行に収まらない。
-   狭い画面では折り返しを許して切り替えを下の行に回し、広い画面では
-   元のヘッダの高さを保つためにナビの横へ並べる。 */
+/* なぜ: 7 言語の切り替えは、広い画面でもナビの横に収まらない。
+   どの幅でもナビの下の行に回し、行の端をナビとそろえる。 */
 header .container { flex-wrap: wrap; gap: 8px 0; }
 .lang-switch { width: 100%; text-align: right; }
-@media (min-width: 600px) { .lang-switch { width: auto; } }
 /* font-size は a に直接置く。既存の `nav a` が a に .9rem を直接当てるので、
    nav 側に書いても継承されず効かない。 */
 .lang-switch a { color: var(--muted); font-size: .8rem; margin-left: 12px; }
@@ -177,3 +178,20 @@ header .container { flex-wrap: wrap; gap: 8px 0; }
 .lang-switch a:lang(ja) { font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif; }
 .lang-switch a:lang(zh-Hans) { font-family: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif; }
 .lang-switch a:lang(ko) { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+.lang-switch a:lang(hi) { font-family: 'Kohinoor Devanagari', 'Noto Sans Devanagari', 'Nirmala UI', sans-serif; }
+.lang-switch a:lang(ar) { font-family: 'Geeza Pro', 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif; }
+
+/* ---- 右から左（アラビア語） ----
+   なぜ: 既存の CSS は左右を margin-left と text-align: right で決めている。
+   dir="rtl" のページではその左右を入れ替えないと、ナビの間隔が端に寄る。
+   見出しの札の letter-spacing は、アラビア文字の続け書きを切ってしまうので外す。 */
+[dir="rtl"] nav a { margin-left: 0; margin-right: 24px; }
+[dir="rtl"] .lang-switch { text-align: left; }
+[dir="rtl"] .lang-switch a { margin-left: 0; margin-right: 12px; }
+[dir="rtl"] .label { letter-spacing: 0; }
+
+/* なぜ: デーヴァナーガリー（ヒンディー語）も文字の上の線でつながるので、
+   letter-spacing で線が切れる。アラビア文字とデーヴァナーガリーの多くの
+   フォントには斜体が無く、ブラウザが作る斜体は崩れて見えるので、em は立てる。 */
+:lang(hi) .label { letter-spacing: 0; }
+:lang(ar) em, :lang(hi) em { font-style: normal; }
