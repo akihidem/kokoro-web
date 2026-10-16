@@ -1,0 +1,197 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #1a1a2e;
+  --muted: #5a6376;
+  --accent: #4361ee;
+  --accent-soft: #e8ecff;
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --radius: 12px;
+}
+
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---- layout ---- */
+.container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+/* ---- header ---- */
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+}
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo { font-size: 1.25rem; font-weight: 700; letter-spacing: .05em; color: var(--ink); }
+.logo span { color: var(--accent); }
+nav a { color: var(--muted); font-size: .9rem; margin-left: 24px; }
+
+/* ---- hero ---- */
+.hero {
+  text-align: center;
+  padding: 80px 0 64px;
+}
+.hero h1 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.35;
+  margin-bottom: 20px;
+}
+.hero h1 .highlight {
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent-soft);
+}
+.hero p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 auto 36px;
+}
+.cta-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 36px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: opacity .2s;
+}
+.cta-btn:hover { opacity: .85; text-decoration: none; }
+
+/* ---- sections ---- */
+section { padding: 64px 0; }
+section + section { border-top: 1px solid var(--border); }
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.label {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+/* ---- problem ---- */
+.problem-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 28px;
+}
+@media (min-width: 520px) { .problem-grid { grid-template-columns: 1fr 1fr; } }
+.problem-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.problem-card .icon { font-size: 1.4rem; margin-bottom: 8px; }
+.problem-card p { font-size: .95rem; color: var(--muted); }
+
+/* ---- how it works ---- */
+.steps { margin-top: 28px; display: flex; flex-direction: column; gap: 24px; }
+.step { display: flex; gap: 16px; align-items: flex-start; }
+.step-num {
+  min-width: 36px; height: 36px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: .9rem;
+}
+.step-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.step-body p { font-size: .9rem; color: var(--muted); }
+
+/* ---- principles ---- */
+.principles { margin-top: 28px; display: grid; gap: 16px; }
+@media (min-width: 600px) { .principles { grid-template-columns: 1fr 1fr; } }
+.principle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.principle h3 { font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
+.principle p { font-size: .88rem; color: var(--muted); }
+
+/* ---- contact ---- */
+.contact-box {
+  background: var(--accent-soft);
+  border-radius: var(--radius);
+  padding: 36px;
+  text-align: center;
+  margin-top: 28px;
+}
+.contact-box p { color: var(--muted); margin-bottom: 20px; }
+
+/* ---- footer ---- */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 0;
+  text-align: center;
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+/* ---- i18n ----
+   なぜ: 日本語のフォント指定のままだと、中国語・韓国語のページで日本語の字形
+   （漢字の字体やハングルの代替フォント）が選ばれてしまう。html の lang ごとに
+   その言語向けのフォントを先に置く。日本語は上の body の指定をそのまま使う。 */
+html:lang(en) body { font-family: -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; }
+html:lang(zh-Hans) body { font-family: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif; }
+html:lang(ko) body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+html:lang(es) body { font-family: -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; }
+html:lang(hi) body { font-family: 'Kohinoor Devanagari', 'Noto Sans Devanagari', 'Nirmala UI', sans-serif; }
+html:lang(ar) body { font-family: 'Geeza Pro', 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif; }
+
+/* なぜ: 7 言語の切り替えは、広い画面でもナビの横に収まらない。
+   どの幅でもナビの下の行に回し、行の端をナビとそろえる。 */
+header .container { flex-wrap: wrap; gap: 8px 0; }
+.lang-switch { width: 100%; text-align: right; }
+/* font-size は a に直接置く。既存の `nav a` が a に .9rem を直接当てるので、
+   nav 側に書いても継承されず効かない。 */
+.lang-switch a { color: var(--muted); font-size: .8rem; margin-left: 12px; }
+.lang-switch a[aria-current="page"] { color: var(--ink); font-weight: 700; }
+/* 切り替えの各言語名は、そのページの言語ではなく自分の言語のフォントで出す */
+.lang-switch a:lang(ja) { font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif; }
+.lang-switch a:lang(zh-Hans) { font-family: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif; }
+.lang-switch a:lang(ko) { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+.lang-switch a:lang(hi) { font-family: 'Kohinoor Devanagari', 'Noto Sans Devanagari', 'Nirmala UI', sans-serif; }
+.lang-switch a:lang(ar) { font-family: 'Geeza Pro', 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif; }
+
+/* ---- 右から左（アラビア語） ----
+   なぜ: 既存の CSS は左右を margin-left と text-align: right で決めている。
+   dir="rtl" のページではその左右を入れ替えないと、ナビの間隔が端に寄る。
+   見出しの札の letter-spacing は、アラビア文字の続け書きを切ってしまうので外す。 */
+[dir="rtl"] nav a { margin-left: 0; margin-right: 24px; }
+[dir="rtl"] .lang-switch { text-align: left; }
+[dir="rtl"] .lang-switch a { margin-left: 0; margin-right: 12px; }
+[dir="rtl"] .label { letter-spacing: 0; }
+
+/* なぜ: デーヴァナーガリー（ヒンディー語）も文字の上の線でつながるので、
+   letter-spacing で線が切れる。アラビア文字とデーヴァナーガリーの多くの
+   フォントには斜体が無く、ブラウザが作る斜体は崩れて見えるので、em は立てる。 */
+:lang(hi) .label { letter-spacing: 0; }
+:lang(ar) em, :lang(hi) em { font-style: normal; }
